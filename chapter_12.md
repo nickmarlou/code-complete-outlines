@@ -30,6 +30,21 @@ class Main {
 ```
 
 Несмотря на то, что в результате деления мы ожидаем получить `1 000 000`, который может быть представлен как 32-битное число, промежуточная операция умножения вернёт `1 000 000 000 000`, который программа не сможет корректно запомнить и вместо этого запомнит `-727 379 968` (можно рассчитать [по формуле](https://stackoverflow.com/a/23481542)). Именно поэтому после деления мы получим `-727`, а вовсе не `1 000 000`.
+
+Чтобы решить проблему переполнения, мы можем использовать тип `long` или класс `BigInteger`, который релизует числа произвольной длины ([arbitary-precision integers](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic)), то есть такие числа, в которых количество цифр и количество знаков после запятой ограничено только доступной памятью.
+
+```java
+import java.math.*;
+
+class Main {
+  public static void main(String[] args) {
+    BigInteger a = BigInteger.valueOf(1000000);
+    BigInteger b = BigInteger.valueOf(1000000);
+    BigInteger product = a.multiply(b).divide(BigInteger.valueOf(1000000));
+    System.out.println(product); // 1000000
+  }
+}
+```
 ### Числа с плавающей точкой
 
 ## Символы и строки
