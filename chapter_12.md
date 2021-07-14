@@ -76,9 +76,38 @@ class Main {
 
 ## Логические переменные
 
+- Вместо простой проверки логического выражения, присвойте его значение переменной с понятным именем
 
+```python
+# Плохо :(
+if (product.is_available && product.count >= order.count) {
+  order.process()
+}
 
-## Перечисляемые типы
+# Лучше!
+order_is_ready_to_process = product.is_available && product.count >= order.count
+if (order_is_ready_to_process) {
+  order.process()
+}
+```
+
+- Раскладывайте сложные, многосоставные условия на несколько переменных с понятными именами
+
+```python
+# Плохо :(
+if (order.status == ORDER_STATUSES.NEW && (product.is_available && product.count >= order.count || product.has_infinite_count)) {
+  order.process()
+}
+
+# Лучше!
+order_is_new = order.status == ORDER_STATUSES.NEW
+products_are_enough = (product.count >= order.count) || product.has_infinite_count
+if (order_is_new && products_are_enough) {
+  order.process()
+}
+```
+
+Давать логическим переменным понятные имена — отличный инструмент в борьбе со сложностью.
 
 ## Именованные константы
 
