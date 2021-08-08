@@ -50,3 +50,32 @@ annual_revenue = revenue.compute_annual_from_quarterly(quarterly_revenue)
 ```
 
 - Проверяйте готовы ли зависимости, необходимые для выполнения выражения, и возвращайте ошибки, если нет (это усложнит код и должно быть целесообразно)
+
+## Выражения, следующие в произвольном порядке
+
+Иногда одно выражение не зависит от другого и из него не следует.
+
+В таких случаях всё равно **старайтесь размещать взаимосвязанные выражения как можно ближе друг к другу.** Они могут связаны, так как работают с одними и теми же данными, выполняют схожие задачи и так далее.
+
+После того, как вы сгруппируете взаимосвязанные выражения, может оказаться, что эти группы не зависят друг от друга. В таком случае полезно выделить каждую группу выражений в отдельный метод.
+
+```python
+# Плохо :(
+marketing_data MarketingData = MarketingData()
+sales_data SalesData = SalesData()
+
+marketing_data.compute_quarterly()
+sales_data.compute_quarterly()
+
+marketing_data.compute_annual()
+sales_data.compute_annual()
+
+# Лучше :)
+marketing_data = MarketingData()
+marketing_data.compute_quarterly()
+marketing_data.compute_annual()
+
+sales_data = SalesData()
+sales_data.compute_quarterly()
+sales_data.compute_annual()
+```
