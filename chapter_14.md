@@ -2,7 +2,7 @@
 
 ## Выражения, следующие в определённом порядке
 
-Проще всего организовать код, выражения в котором должны выполняться в определённом порядке. **Основная идея: ясно показывать как одно выражение зависит от другого так, чтобы это помогало понять и объясняло избранный порядок выполнения.**
+Проще всего организовать код, выражения в котором должны выполняться в определённом порядке. **Основная идея: ясно показывать как одно выражение зависит от другого, чтобы это помогало понять порядок их выполнения.**
 
 Основные принципы:
 
@@ -23,6 +23,7 @@ annual_revenue = revenue.compute_annual(quarterly_revenue)
 - Называйте методы так, чтобы зависимости были очевидны
 
 ```python
+# Ещё лучше :)
 monthly_revenue = revenue.compute_monthly()
 quarterly_revenue = revenue.compute_quarterly_from_monthly(monthly_revenue)
 annual_revenue = revenue.compute_annual_from_quarterly(quarterly_revenue)
@@ -31,6 +32,7 @@ annual_revenue = revenue.compute_annual_from_quarterly(quarterly_revenue)
 - Документируйте неявные зависимости или допущения с помощью комментариев (это поможет компенсировать недостатки кода, если их невозможно устранить)
 
 ```python
+# И ещё лучше :)
 class Revenue():
     def compute_monthly(self, start: Optional[datetime], end: Optional[datetime]) -> List[dict]:
         """
