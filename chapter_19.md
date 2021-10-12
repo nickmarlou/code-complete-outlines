@@ -53,4 +53,31 @@ def check_order_is_ready_to_process(order, product) -> bool:
     return order_is_ready_to_process
 ```
 
-- Используйте для проверки сложных условий с несколькими переменными таблицы решений, а не операторы `if` или `case`
+### Составление позитивных логических выражений
+
+Предпочитайте позитивные логические выражения негативным – они создают меньше путаницы. Вот несколько приёмов:
+
+- В операторах `if` заменяйте негативные выражения позитивными
+
+```python
+# Плохо :(
+if not order.payment.is_success:
+    order.payment.notify_error()
+
+# Лучше
+is_payment_error = not order.payment.is_success
+if is_payment_error:
+    order.payment.notify_error()
+```
+
+- Упрощайте логические выражения с помощью [законов Деморгана](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%D1%8B_%D0%B4%D0%B5_%D0%9C%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0)
+
+```python
+# Плохо :(
+if not order.payment.is_success or not order.delivery_is_started:
+    pass
+
+# Лучше
+if not (order.payment.is_success and order.delivery_is_started):
+    pass
+```
