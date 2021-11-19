@@ -51,6 +51,7 @@ def check_order_is_ready_to_process(order, product) -> bool:
 ```
 
 - **Используйте для проверки сложных условий** с несколькими переменными **таблицы решений**, а не операторы `if` или `case`
+
 ### Составление позитивных логических выражений
 
 Предпочитайте позитивные логические выражения негативным – они создают меньше путаницы. Вот несколько приёмов:
@@ -62,7 +63,7 @@ def check_order_is_ready_to_process(order, product) -> bool:
 if not order.payment.is_success:
     order.payment.notify_error()
 
-# Лучше
+# Лучше!
 is_payment_error = not order.payment.is_success
 if is_payment_error:
     order.payment.notify_error()
@@ -75,7 +76,7 @@ if is_payment_error:
 if not order.payment.is_success or not order.delivery_is_started:
     pass
 
-# Лучше
+# Лучше!
 if not (order.payment.is_success and order.delivery_is_started):
     pass
 ```
@@ -98,6 +99,8 @@ if (a < b == c == d)
 if ((a < b) == (c == d))
 ```
 
+### Понимание правил вычисления логических выражений
+
 ### Упорядочение числовых выражений со значениями на числовой прямой
 
 Числовые условия следует организовать в том же порядке, в котором точки располагаются на числовой прямой: **слева направо, от наименьших к наибольшим**.
@@ -109,3 +112,9 @@ if (i < MIN_ELEMENTS)
 # Если предполагается, что `i` больше
 if (MIN_ELEMENTS < i)
 ```
+
+### Общие принципы сравнения с `0`
+
+
+
+### Общие проблемы с логическими выражениями
